@@ -35,7 +35,7 @@ services:
       ETCD_ADVERTISE_CLIENT_URLS: 'http://etcd:2379'
       ETCD_LISTEN_CLIENT_URLS: 'http://0.0.0.0:2379'
     volumes:
-      - ./etcd_data:/bitnami/etcd
+      - etcd_data:/bitnami/etcd
     <<: *merged-conf
   prometheus:
     image: prom/prometheus:v2.25.0
@@ -53,3 +53,6 @@ services:
       - ./grafana_conf/dashboards:/var/lib/grafana/dashboards
       - ./grafana_conf/config/grafana.ini:/etc/grafana/grafana.ini
     <<: *merged-conf
+volumes:
+  etcd_data:
+    driver: local
